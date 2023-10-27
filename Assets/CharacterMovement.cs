@@ -22,7 +22,7 @@ public class CharacterMovement : MonoBehaviour
     {
         // Grounded check using a small circle overlap at the character's feet.
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
-
+        
         // Get input from the player (e.g., arrow keys).
         float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -32,7 +32,8 @@ public class CharacterMovement : MonoBehaviour
         // Set the character's velocity to move it.
         rb.velocity = velocity;
 
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        //if (isGrounded && Input.GetButtonDown("Jump"))
+        if (Mathf.Abs(rb.velocity.y) <= 0.01f && Input.GetButtonDown("Jump"))
         {
             // Apply an upward force for jumping when grounded.
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
